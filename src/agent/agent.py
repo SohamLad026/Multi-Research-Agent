@@ -1,5 +1,5 @@
 from langchain.agents import create_agent
-from langchain_groq import ChatGroq
+from langchain_ollama import ChatOllama
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from src.tools.tools import web_search , scrape_url
@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-#Model Initialization
-llm = ChatGroq(model="openai/gpt-oss-120b",temperature=0)
+#Model Initialization (local Ollama; run `ollama serve` and `ollama pull <model>` first)
+llm = ChatOllama(model="qwen2.5:0.5b", temperature=0)
 
 
 #Search Agent 
@@ -34,8 +34,8 @@ writer_prompt = ChatPromptTemplate.from_messages([
      
      Topic: {topic}
      
-     Rsearch Gathered:
-     {rsearch}
+     Research Gathered:
+     {research}
      
      Structure the report as:
      -Introduction
